@@ -76,7 +76,7 @@ router.delete('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
     const id = req.params.id
     Character.findById(id)
-        populate('patronus.author', 'username')
+        .populate('patronus.author', 'username')
         .then(character => {
             res.json({character: character})
         })

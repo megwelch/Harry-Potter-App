@@ -7,6 +7,7 @@ const path = require('path') // import path module
 // const Character = require('./models/characters')
 const CharacterRouter = require('./controllers/characterControllers')
 const UserRouter = require('./controllers/userControllers')
+const PatronusRouter = require('./controllers/patronusControllers')
 const middleware = require('./utils/middleware')
 
 /////////////////////////////////////////////
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 // Register our Routes
 /////////////////////////////////////////////
 app.use('/characters', CharacterRouter)
+app.use('/patronus', PatronusRouter)
 app.use('/users', UserRouter)
 
 /////////////////////////////////////////////
