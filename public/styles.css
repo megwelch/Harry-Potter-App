@@ -1,0 +1,43 @@
+body{
+    background: url('https://images.ctfassets.net/usf1vwtuqyxm/71J6YPxNauhFABbjHpGluJ/631bd6980b0a430d5b476ef331abb2b5/release_1_hogwarts.png') no-repeat center center fixed;
+    /* background-position: center; */
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+}
+
+h2 {
+    text-align: center;
+    margin-top: 50px;
+    color: white;
+    background-color: black;
+}
+
+.card {
+    margin: 5px;
+    width: 18rem;
+}
+
+label {
+    margin-top: 5px;
+}
+
+.sign-up, .log-in, .new-character {
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    margin-top: 50px;
+    width: 50%;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+.checkbox {
+    margin-top: 9px;
+    margin-left: 5px;
+}
+
+.btn-secondary {
+    margin-bottom: 10px;
+}

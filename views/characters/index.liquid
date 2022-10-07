@@ -1,0 +1,25 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <div>
+        <h2 class="display-6">All Characters</h2>
+        <div class="row">
+            {% for character in characters %}
+                <div class="card">
+                    <h5 class="card-header">{{character.name}}</h5>
+                    <div class="card-body"></div>
+                        <h5 class="card-title">
+                            {% if character.alive %}
+                                Alive
+                            {% else %}
+                                Dead
+                            {% endif %}
+                        </h5>
+                        <p class="card-text">{{character.name}} is house {{character.house}}</p>
+                        <a class="btn btn-secondary" href="/characters/{{character.id}}">
+                            View {{character.name}}
+                        </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

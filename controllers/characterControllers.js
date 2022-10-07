@@ -3,7 +3,6 @@
 ////////////////////////////////////////
 const express = require("express")
 const Character = require("../models/characters")
-const { populate } = require("../models/user")
 
 /////////////////////////////////////////
 // Create Route
@@ -19,17 +18,31 @@ router.get('/', (req, res) => {
     Character.find({})
         .populate('patronus.author', 'username')
         .then(characters => {
-            res.json({characters: characters})
+            const username = req.session.username
+            const loggedIn = req.session.loggedIn
+            const userId = req.session.userId
+
+            res.render('characters/index', {characters, username, loggedIn, userId})
         })
         .catch(err => console.log(err))
 })
 
+// GET new character
+router.get('/new', (req, res) => {
+    const username = req.session.username
+    const loggedIn = req.session.loggedIn
+    const userId = req.session.userId
+
+    res.render('characters/new', { username, loggedIn, userId })
+})
+
 // POST request
 router.post('/', (req, res) => {
+    req.body.alive = req.body.alive === 'on' ? true : false
     req.body.owner = req.session.userId
     Character.create(req.body)
         .then(character => {
-            res.status(201).json({ character: character.toObject() })
+            res.redirect('/characters')
         })
         .catch(err => console.log(err))
 })
@@ -38,8 +51,17 @@ router.post('/', (req, res) => {
 router.get('/mine', (req, res) => {
     Character.find({owner: req.session.userId})
     .then(characters => {
-        res.status(200).json({characters: characters})
+        const username = req.session.username
+        const loggedIn = req.session.loggedIn
+        const userId = req.session.userId
+    
+        res.render('characters/index', { characters, username, loggedIn, userId })
     })
+})
+
+// GET request-- show the updates page
+router.get('/edit/:id', (req, res) =>{
+    res.send('edit page')
 })
 
 // PUT request
@@ -60,14 +82,9 @@ router.put('/:id', (req, res) => {
 // DELETE request
 router.delete('/:id', (req, res) => {
     const id = req.params.id
-    Character.findById(id)
+    Character.findByIdAndRemove(id)
         .then(character => {
-            if(character.owner == req.session.userId){
-                res.sendStatus(204)
-                return character.deleteOne()
-            } else {
-                res.sendStatus(401)
-            }
+            res.redirect('/characters')
         })
         .catch (err => console.log(err))
 })
@@ -78,7 +95,11 @@ router.get('/:id', (req, res) => {
     Character.findById(id)
         .populate('patronus.author', 'username')
         .then(character => {
-            res.json({character: character})
+            const username = req.session.username
+            const loggedIn = req.session.loggedIn
+            const userId = req.session.userId
+        
+            res.render('characters/show', { character, username, loggedIn, userId })
         })
         .catch(err => console.log(err))
 })

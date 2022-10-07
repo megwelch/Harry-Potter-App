@@ -3,6 +3,7 @@
 /////////////////////////////////////////////
 require('dotenv').config() // Load ENV Variables
 const express = require('express') // import express
+const methodOverride = require('method-override')
 const morgan = require('morgan') // import morgan
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
@@ -12,6 +13,7 @@ const MongoStore = require('connect-mongo')
 /////////////////////////////////////////////
 // middleware runs before all the routes, every request to process through our middleware before mongoose does anything with it
 const middleware = (app) => {
+    app.use(methodOverride('_method'))
     app.use(morgan('tiny')) 
     // ^^^ this is for request logging, the 'tiny' argument declares what size of morgan log to use
     app.use(express.urlencoded({ extended:true }))

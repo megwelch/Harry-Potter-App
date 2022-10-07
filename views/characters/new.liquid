@@ -1,0 +1,21 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+
+    <div class="container-sm new-character">
+        <form action="/characters" method="POST">
+            <fieldset>
+                <legend>Create a New Character</legend>
+                <label class="form-label">Name: </label>
+                <input class="form-control" type="text" name="name" placeholder="name of the character">
+                <label class="form-label">House: </label>
+                <input class="form-control" type="text" name="house" placeholder="house of the character">
+                {%- comment -%} <label class="form-label">Patronus: </label>
+                <input class="form-control" type="text" name="patronus" placeholder="character's patronus"> {%- endcomment -%}
+                <label class="form-label">Is the Character Alive?: </label>
+                <input class="form-check-input checkbox" type="checkbox" name="alive">
+            </fieldset>
+            <input type="submit" value="Create New Character" class="btn btn-success">
+        </form>
+    </div>
+
+{% endblock %}
