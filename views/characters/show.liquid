@@ -22,5 +22,36 @@
                 </div>
             {% endif %}
         </article>
+        <hr>
+        <h4>Patronus</h4>
+        <hr>
+        {% if loggedIn %}
+            <div class="col-md-6">
+                <form action="/patronus/{{character.id}}" method="POST">
+                    <fieldset>
+                        <legend>Add Patronus</legend>
+                        <label class="form-label">patronus:</label>
+                        <input class="form-control mb-1" type="text" placeholder="pick the patronus..." name="creature" required>
+                    </fieldset>
+                    <input class="btn btn-success" type="submit" value="Add Patronus">
+                </form>
+            </div>
+        {% else %}
+            <div class="col-md-6">
+                <small>If you'd like to create a patronus, please log in...</small>
+            </div>
+        {% endif %}
+        <hr>
+        {% if character.patronus.length > 0 %}
+            <div class="container-sm justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    {% for patronus in character.patronus %}
+                        {% render '../patronus.liquid', patronus: creature, userId: userId, character: character %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <small>no patronus yet...</small>
+        {% endif %}
     </div>
 {% endblock %}

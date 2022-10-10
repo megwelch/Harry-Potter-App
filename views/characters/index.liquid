@@ -1,25 +1,34 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-    <div>
-        <h2 class="display-6">All Characters</h2>
-        <div class="row">
-            {% for character in characters %}
-                <div class="card">
-                    <h5 class="card-header">{{character.name}}</h5>
-                    <div class="card-body"></div>
-                        <h5 class="card-title">
-                            {% if character.alive %}
-                                Alive
-                            {% else %}
-                                Dead
-                            {% endif %}
-                        </h5>
-                        <p class="card-text">{{character.name}} is house {{character.house}}</p>
-                        <a class="btn btn-secondary" href="/characters/{{character.id}}">
-                            View {{character.name}}
-                        </a>
-                </div>
-            {% endfor %}
+    {% if characters.length > 0%}
+        <div>
+            <h2 class="display-6">All of the Characters</h2>
+            <div class="row">
+                {% for character in characters %}
+                    <div class="card" style="width: 18rem;">
+                        <h5 class="card-header">{{character.name}}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {% if character.alive %}
+                                    Still kickin'
+                                {% else %}
+                                    Dead
+                                {% endif %}
+                            </h5>
+                            <p class="card-text">{{character.name}} is in house {{character.house}}</p>
+
+                            </div>
+                            <a class="btn btn-info" href="/characters/{{character.id}}">
+                                View {{character.name}}
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    {% else %}
+        <div>
+            <h2 class="display-6">No characters yet... time to add some!</h2>
+        </div>
+    {% endif %}
 {% endblock %}
