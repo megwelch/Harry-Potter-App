@@ -9,6 +9,7 @@ const mongoose = require("mongoose") // import mongoose
 /////////////////////////////////////////////
 // this is where we will set up our inputs for our database connection function
 const DATABASE_URL = process.env.DATABASE_URL
+const DEPLOYED_URL = process.env.DEPLOYED_URL
 // here is out DB config object
 const CONFIG = {
     useNewUrlParser: true,
@@ -16,7 +17,7 @@ const CONFIG = {
 }
 
 // establish our connection
-mongoose.connect(DATABASE_URL, CONFIG)
+mongoose.connect(DEPLOYED_URL, CONFIG)
 
 // tell mongoose what to do with cerain events
 // opens, disconnects, and errors

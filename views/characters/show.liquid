@@ -46,7 +46,7 @@
             <div class="container-sm justify-content-center">
                 <div class="col-md-8 col-lg-6">
                     {% for patronus in character.patronus %}
-                        {% render '../patronus.liquid', patronus: creature, userId: userId, character: character %}
+                        {% render '../patronus.liquid', patronus: patronus, userId: userId, character: character %}
                     {% endfor %}
                 </div>
             </div>
